@@ -1,0 +1,97 @@
+﻿@model Web02LojadeJogos.Models.Jogo 
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset style="margin-top: 20px;">
+        <legend>Cadastrar Jogo</legend>
+
+        <!-- Input Cod -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoCod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoCod)
+            @Html.ValidationMessageFor(model => model.JogoCod)
+        </div>
+
+        <!-- Input Nome -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoNome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoNome)
+            @Html.ValidationMessageFor(model => model.JogoNome)
+        </div>
+
+        <!-- Input Versao -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoVersao)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoVersao)
+            @Html.ValidationMessageFor(model => model.JogoVersao)
+        </div>
+
+        <!-- Input Desenvolvedor -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoDesenvolvedor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoDesenvolvedor)
+            @Html.ValidationMessageFor(model => model.JogoDesenvolvedor)
+        </div>
+
+        <!-- Input Genero -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoGenero)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoGenero)
+            @Html.ValidationMessageFor(model => model.JogoGenero)
+        </div>
+
+        <!-- Input FaixaEtaria -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoFaixaEtaria)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoFaixaEtaria)
+            @Html.ValidationMessageFor(model => model.JogoFaixaEtaria)
+        </div>
+
+        <!-- Input Plataforma -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoPlataforma)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoPlataforma)
+            @Html.ValidationMessageFor(model => model.JogoPlataforma)
+        </div>
+
+        <!-- Input Lancamento -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoLancamento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoLancamento)
+            @Html.ValidationMessageFor(model => model.JogoLancamento)
+        </div>
+
+        <!-- Input Sinopse -->
+        <div class="editor-label">
+            @Html.DisplayNameFor(model => model.JogoSinopse)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JogoSinopse)
+            @Html.ValidationMessageFor(model => model.JogoSinopse)
+        </div>
+
+
+        <br />
+        <input type="submit" value="Cadastrar" />
+    </fieldset>
+}

@@ -1,0 +1,48 @@
+﻿@model Web02LojadeJogos.Models.Funcionario
+@{
+    ViewBag.Title = "Listar";
+}
+
+<fieldset style="margin-top: 20px;">
+    <legend>Funcionário Recém-Cadastrado</legend>
+
+    <dl class="dl-horizontal">
+        <!-- Output Cod -->
+        <dt>@Html.DisplayNameFor(model => model.FuncCod)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncCod)</dd>
+
+        <!-- Output Nome -->
+        <dt>@Html.DisplayNameFor(model => model.FuncNome)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncNome)</dd>
+
+        <!-- Output Cpf -->
+        <dt>@Html.DisplayNameFor(model => model.FuncCpf)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncCpf)</dd>
+
+        <!-- Output Rg -->
+        <dt>@Html.DisplayNameFor(model => model.FuncRg)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncRg)</dd>
+
+        <!-- Output Nasc -->
+        <dt>@Html.DisplayNameFor(model => model.FuncNasc)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncNasc)</dd>
+
+        <!-- Output Endereco -->
+        <dt>@Html.DisplayNameFor(model => model.FuncEndereco)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncEndereco)</dd>
+
+        <!-- Output Celular -->
+        <dt>@Html.DisplayNameFor(model => model.FuncCelular)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncCelular)</dd>
+
+        <!-- Output Email -->
+        <dt>@Html.DisplayNameFor(model => model.FuncEmail)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncEmail)</dd>
+
+        <!-- Output Cargo -->
+        <dt>@Html.DisplayNameFor(model => model.FuncCargo)</dt>
+        <dd>@Html.DisplayFor(model => model.FuncCargo)</dd>
+
+    </dl>
+    @Html.ActionLink("Voltar", "Index", "Funcionario")
+</fieldset>
