@@ -1,9 +1,9 @@
 ﻿@model Web02LojadeJogos.Models.Cliente
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cadastrar Cliente";
 }
 
-@using (Html.BeginForm("MensagemCliente", "Cliente", FormMethod.Post))
+@using (Html.BeginForm("Mensagem", "Cliente", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
 <fieldset style="margin-top: 20px;">
@@ -68,6 +68,6 @@
     <br />
     <br />
 
-    <p>@Html.ActionLink("Clientes Cadastrados", "ListarCliente")</p>
+    <p>@Html.ActionLink("Clientes Cadastrados", "Listar")</p>
 </fieldset>
 }

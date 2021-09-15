@@ -11,7 +11,7 @@ namespace Web02LojadeJogos.Controllers
     public class ClienteController : Controller
     {
         // GET: Cliente
-        public ActionResult CadastrarCliente()
+        public ActionResult Cadastrar()
         {
             var cliente = new Cliente();
             return View(cliente);
@@ -19,12 +19,12 @@ namespace Web02LojadeJogos.Controllers
         Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult MensagemCliente(Cliente cliente)
+        public ActionResult Mensagem(Cliente cliente)
         {
             ac.CadastrarCliente(cliente);
             return View(cliente);
         }
-        public ActionResult ListarCliente(Cliente cliente)
+        public ActionResult Listar(Cliente cliente)
         {
             var Exibir = new Acoes();
             var Todos = Exibir.BuscarTodosClientes();
