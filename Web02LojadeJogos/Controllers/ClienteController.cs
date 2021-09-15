@@ -4,30 +4,31 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web02LojadeJogos.Models;
+using Web02LojadeJogos.Repositorio;
 
 namespace Web02LojadeJogos.Controllers
 {
     public class ClienteController : Controller
     {
         // GET: Cliente
-        public ActionResult Index()
+        public ActionResult CadastrarCliente()
         {
             var cliente = new Cliente();
             return View(cliente);
         }
+        Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Index(Cliente cliente)
+        public ActionResult MensagemCliente(Cliente cliente)
         {
-            if (ModelState.IsValid)
-            {
-                return View("Listar", cliente);
-            }
+            ac.CadastrarCliente(cliente);
             return View(cliente);
         }
-        public ActionResult Listar(Cliente cliente)
+        public ActionResult ListarCliente(Cliente cliente)
         {
-            return View(cliente);
+            var Exibir = new Acoes();
+            var Todos = Exibir.BuscarTodosClientes();
+            return View(Todos);
         }
     }
 }

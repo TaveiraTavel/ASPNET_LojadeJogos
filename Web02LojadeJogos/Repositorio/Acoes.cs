@@ -14,10 +14,10 @@ namespace Web02LojadeJogos.Repositorio
 
         public void CadastrarCliente(Cliente cliente)
         {
-            MySqlCommand query = new MySqlCommand("CALL CadastrarCliente(@cliNome, @cliCpf, @cliNasc, @cliEmail, @cliCelular, @cliEndereco)", con.ConectarBD());
+            MySqlCommand query = new MySqlCommand("INSERT INTO tbCliente values(@cliNome, @cliCpf, @cliNasc, @cliEmail, @cliCelular, @cliEndereco);", con.ConectarBD());
                 query.Parameters.Add("@cliNome", MySqlDbType.VarChar).Value = cliente.CliNome;
                 query.Parameters.Add("@cliCpf", MySqlDbType.VarChar).Value = cliente.CliCpf;
-                query.Parameters.Add("@cliNasc", MySqlDbType.VarChar).Value = cliente.CliNasc;
+                query.Parameters.Add("@cliNasc", MySqlDbType.DateTime).Value = cliente.CliNasc;
                 query.Parameters.Add("@cliEmail", MySqlDbType.VarChar).Value = cliente.CliEmail;
                 query.Parameters.Add("@cliCelular", MySqlDbType.VarChar).Value = cliente.CliCelular;
                 query.Parameters.Add("@cliEndereco", MySqlDbType.VarChar).Value = cliente.CliEndereco;
@@ -27,7 +27,7 @@ namespace Web02LojadeJogos.Repositorio
 
         public Cliente BuscarClienteByCpf(int cpf)
         {
-            MySqlCommand query = new MySqlCommand("SELECT * FROM vwCliente WHERE Cpf = @cliCpf", con.ConectarBD());
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente WHERE Cpf = @cliCpf;", con.ConectarBD());
             query.Parameters.Add("@cliCpf", MySqlDbType.VarChar).Value = cpf;
             var DadosClienteByCpf = query.ExecuteReader();
             return ListarClienteByCpf(DadosClienteByCpf).FirstOrDefault();
@@ -56,7 +56,7 @@ namespace Web02LojadeJogos.Repositorio
 
         public List<Cliente> BuscarTodosClientes()
         {
-            MySqlCommand query = new MySqlCommand("SELECT * FROM vwCliente", con.ConectarBD());
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente;", con.ConectarBD());
             var DadosTodosClientes = query.ExecuteReader();
             return ListarTodosClientes(DadosTodosClientes);
         }

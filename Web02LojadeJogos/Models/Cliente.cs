@@ -40,15 +40,17 @@ namespace Web02LojadeJogos.Models
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Campo obrigatório")]
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email inválido")]
+        [StringLength(70, MinimumLength = 5, ErrorMessage = "O email deve ter entre 5 e 70 caracteres")]
         public string CliEmail { get; set; }
 
         [Display(Name = "Celular")]
         [Required(ErrorMessage = "Campo obrigatório")]
+        [StringLength(11, MinimumLength = 8, ErrorMessage = "Apenas números, incluir DDD")]
         public string CliCelular { get; set; }
 
         [Display(Name = "Endereço")]
         [Required(ErrorMessage = "Campo obrigatório")]
-        [StringLength(70, MinimumLength = 15, ErrorMessage = "O endereço deve ter entre 15 e 70 caracteres")]
+        [StringLength(150, MinimumLength = 15, ErrorMessage = "O endereço deve ter entre 15 e 150 caracteres")]
         public string CliEndereco { get; set; }
 
     }
