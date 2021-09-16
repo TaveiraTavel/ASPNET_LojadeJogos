@@ -25,15 +25,52 @@ namespace Web02LojadeJogos.Repositorio
             con.DesconectarBD();
         }
 
+        public void CadastrarFuncionario(Funcionario funcionario)
+        {
+            MySqlCommand query = new MySqlCommand("INSERT INTO tbFuncionario values(default, @funcNome, @funcCpf, @funcRg, @funcNasc, @funcEndereco, @funcCelular, @funcEmail, @funcCargo;", con.ConectarBD());
+                query.Parameters.Add("@funcNome", MySqlDbType.VarChar).Value = funcionario.FuncNome;
+                query.Parameters.Add("@funcCpf", MySqlDbType.VarChar).Value = funcionario.FuncCpf;
+                query.Parameters.Add("@funcRg", MySqlDbType.VarChar).Value = funcionario.FuncRg;
+                query.Parameters.Add("@funcNasc", MySqlDbType.VarChar).Value = funcionario.FuncNasc;
+                query.Parameters.Add("@funcEndereco", MySqlDbType.VarChar).Value = funcionario.FuncEndereco;
+                query.Parameters.Add("@funcCelular", MySqlDbType.VarChar).Value = funcionario.FuncCelular;
+                query.Parameters.Add("@funcEmail", MySqlDbType.VarChar).Value = funcionario.FuncEmail;
+                query.Parameters.Add("@funcCargo", MySqlDbType.VarChar).Value = funcionario.FuncCargo;
+            query.ExecuteNonQuery();
+            con.DesconectarBD();
+        }
+
         public Cliente BuscarClienteByCpf(int cpf)
         {
             MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente WHERE Cpf = @cliCpf;", con.ConectarBD());
-            query.Parameters.Add("@cliCpf", MySqlDbType.VarChar).Value = cpf;
+                query.Parameters.Add("@cliCpf", MySqlDbType.VarChar).Value = cpf;
             var DadosClienteByCpf = query.ExecuteReader();
-            return ListarClienteByCpf(DadosClienteByCpf).FirstOrDefault();
+            return ListarClientes(DadosClienteByCpf).FirstOrDefault();
         }
-        
-        public List<Cliente> ListarClienteByCpf(MySqlDataReader dados)
+
+        public Funcionario BuscarFuncionarioByCod(int cod)
+        {
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbFuncionario WHERE CodFunc = @funcCod;", con.ConectarBD());
+                query.Parameters.Add("funcCod", MySqlDbType.Int64).Value = cod;
+            var DadosFuncionarioByCod = query.ExecuteReader();
+            return ListarFuncionarios(DadosFuncionarioByCod).FirstOrDefault();
+        }
+
+        public List<Cliente> BuscarTodosClientes()
+        {
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente;", con.ConectarBD());
+            var DadosTodosClientes = query.ExecuteReader();
+            return ListarClientes(DadosTodosClientes);
+        }
+
+        public List<Funcionario> BuscarTodosFuncionarios()
+        {
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbFuncionario", con.ConectarBD());
+            var DadosTodosFuncionarios = query.ExecuteReader();
+            return ListarFuncionarios(DadosTodosFuncionarios);
+        }
+
+        public List<Cliente> ListarClientes(MySqlDataReader dados)
         {
             var ClienteByCpf = new List<Cliente>();
             while (dados.Read())
@@ -54,32 +91,27 @@ namespace Web02LojadeJogos.Repositorio
             return ClienteByCpf;
         }
 
-        public List<Cliente> BuscarTodosClientes()
+        public List<Funcionario> ListarFuncionarios(MySqlDataReader dados)
         {
-            MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente;", con.ConectarBD());
-            var DadosTodosClientes = query.ExecuteReader();
-            return ListarTodosClientes(DadosTodosClientes);
-        }
-
-        public List<Cliente> ListarTodosClientes(MySqlDataReader dados)
-        {
-            var TodosClientes = new List<Cliente>();
+            var FuncionarioByCod = new List<Funcionario>();
             while (dados.Read())
             {
-                var ClienteTemp = new Cliente()
+                var FuncionarioTemp = new Funcionario()
                 {
-                    CliNome = dados["Nome"].ToString(),
-                    CliCpf = dados["Cpf"].ToString(),
-                    CliNasc = DateTime.Parse(dados["Nasc"].ToString()),
-                    CliEmail = dados["Email"].ToString(),
-                    CliCelular = dados["Celular"].ToString(),
-                    CliEndereco = dados["Endereco"].ToString()
+                    FuncNome = dados["Nome"].ToString(),
+                    FuncCpf = dados["Cpf"].ToString(),
+                    FuncRg = dados["Rg"].ToString(),
+                    FuncNasc = DateTime.Parse(dados["Nasc"].ToString()),
+                    FuncEndereco = dados["Endereco"].ToString(),
+                    FuncCelular = dados["Celular"].ToString(),
+                    FuncEmail = dados["Email"].ToString(),
+                    FuncCargo = dados["Cargo"].ToString()
                 };
-                TodosClientes.Add(ClienteTemp);
+                FuncionarioByCod.Add(FuncionarioTemp);
             }
 
             dados.Close();
-            return TodosClientes;
+            return FuncionarioByCod;
         }
     }
 }
