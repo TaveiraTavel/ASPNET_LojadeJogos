@@ -175,7 +175,6 @@
     <Content Include="Views\Cliente\Listar.cshtml" />
     <Content Include="Views\Jogo\Index.cshtml" />
     <Content Include="Views\Jogo\Listar.cshtml" />
-    <Content Include="Views\Cliente\Mensagem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

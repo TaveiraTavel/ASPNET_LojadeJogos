@@ -19,13 +19,9 @@ namespace Web02LojadeJogos.Controllers
         Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Mensagem(Cliente cliente)
-        {
-            ac.CadastrarCliente(cliente);
-            return View(cliente);
-        }
         public ActionResult Listar(Cliente cliente)
         {
+            ac.CadastrarCliente(cliente);
             var Exibir = new Acoes();
             var Todos = Exibir.BuscarTodosClientes();
             return View(Todos);
