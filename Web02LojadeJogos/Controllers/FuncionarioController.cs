@@ -4,30 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web02LojadeJogos.Models;
+using Web02LojadeJogos.Repositorio;
 
 namespace Web02LojadeJogos.Controllers
 {
     public class FuncionarioController : Controller
     {
         // GET: Funcionario
-        public ActionResult Index()
+        public ActionResult Cadastrar()
         {
             var funcionario = new Funcionario();
             return View(funcionario);
         }
+        Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Index(Funcionario funcionario)
-        {
-            if (ModelState.IsValid)
-            {
-                return View("Listar", funcionario);
-            }
-            return View(funcionario);
-        }
         public ActionResult Listar(Funcionario funcionario)
         {
-            return View(funcionario);
+            ac.CadastrarFuncionario(funcionario);
+            var Exibir = new Acoes();
+            var Todos = Exibir.BuscarTodosFuncionarios();
+            return View(Todos);
         }
     }
 }
