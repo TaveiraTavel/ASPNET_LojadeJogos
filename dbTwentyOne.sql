@@ -17,8 +17,8 @@ CREATE TABLE tbCliente(
 CREATE TABLE tbFuncionario(
 	CodFunc mediumint primary key auto_increment,
 	Nome varchar(100) not null,
-    Cpf varchar(14) primary key,
-    Rg varchar(14) primary key,
+    Cpf varchar(14) not null,
+    Rg varchar(14) not null,
     Nasc datetime not null,
     Endereco varchar(150) not null,
     Celular varchar(11) not null,

@@ -27,11 +27,11 @@ namespace Web02LojadeJogos.Repositorio
 
         public void CadastrarFuncionario(Funcionario funcionario)
         {
-            MySqlCommand query = new MySqlCommand("INSERT INTO tbFuncionario values(default, @funcNome, @funcCpf, @funcRg, @funcNasc, @funcEndereco, @funcCelular, @funcEmail, @funcCargo;", con.ConectarBD());
+            MySqlCommand query = new MySqlCommand("INSERT INTO tbFuncionario values(default, @funcNome, @funcCpf, @funcRg, @funcNasc, @funcEndereco, @funcCelular, @funcEmail, @funcCargo);", con.ConectarBD());
                 query.Parameters.Add("@funcNome", MySqlDbType.VarChar).Value = funcionario.FuncNome;
                 query.Parameters.Add("@funcCpf", MySqlDbType.VarChar).Value = funcionario.FuncCpf;
                 query.Parameters.Add("@funcRg", MySqlDbType.VarChar).Value = funcionario.FuncRg;
-                query.Parameters.Add("@funcNasc", MySqlDbType.VarChar).Value = funcionario.FuncNasc;
+                query.Parameters.Add("@funcNasc", MySqlDbType.DateTime).Value = funcionario.FuncNasc;
                 query.Parameters.Add("@funcEndereco", MySqlDbType.VarChar).Value = funcionario.FuncEndereco;
                 query.Parameters.Add("@funcCelular", MySqlDbType.VarChar).Value = funcionario.FuncCelular;
                 query.Parameters.Add("@funcEmail", MySqlDbType.VarChar).Value = funcionario.FuncEmail;
@@ -98,6 +98,7 @@ namespace Web02LojadeJogos.Repositorio
             {
                 var FuncionarioTemp = new Funcionario()
                 {
+                    FuncCod = Convert.ToUInt16(dados["CodFunc"]),
                     FuncNome = dados["Nome"].ToString(),
                     FuncCpf = dados["Cpf"].ToString(),
                     FuncRg = dados["Rg"].ToString(),

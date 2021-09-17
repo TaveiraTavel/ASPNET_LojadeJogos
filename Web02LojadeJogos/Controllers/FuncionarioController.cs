@@ -19,9 +19,24 @@ namespace Web02LojadeJogos.Controllers
         Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Listar(Funcionario funcionario)
+        public ActionResult Cadastrar(Funcionario funcionario)
         {
-            ac.CadastrarFuncionario(funcionario);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ac.CadastrarFuncionario(funcionario);
+                    return RedirectToAction("Listar");
+                }
+                return View(funcionario);
+            }
+            catch
+            {
+                return RedirectToAction("Cadastrar");
+            }
+        }
+        public ActionResult Listar()
+        {
             var Exibir = new Acoes();
             var Todos = Exibir.BuscarTodosFuncionarios();
             return View(Todos);

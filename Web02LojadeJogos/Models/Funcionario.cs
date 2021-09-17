@@ -8,6 +8,8 @@ namespace Web02LojadeJogos.Models
 {
     public class Funcionario
     {
+        [Display(Name = "Código")]
+        public ushort FuncCod { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Campo obrigatório")]

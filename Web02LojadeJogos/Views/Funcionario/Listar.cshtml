@@ -1,45 +1,37 @@
-﻿@model Web02LojadeJogos.Models.Funcionario
+﻿@model IEnumerable<Web02LojadeJogos.Models.Funcionario>
 @{
-    ViewBag.Title = "Listar";
+    ViewBag.Title = "Listar Funcionários";
 }
 
-<fieldset style="margin-top: 20px;">
-    <legend>Funcionário Recém-Cadastrado</legend>
+<br />
+<p>@Html.ActionLink("Cadastrar novo Funcionario", "Cadastrar")</p>
 
-    <dl class="dl-horizontal">
+<h3 style="font-size: 21px;">Funcionários Cadastrados</h3>
 
-        <!-- Output Nome -->
-        <dt>@Html.DisplayNameFor(model => model.FuncNome)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncNome)</dd>
-
-        <!-- Output Cpf -->
-        <dt>@Html.DisplayNameFor(model => model.FuncCpf)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncCpf)</dd>
-
-        <!-- Output Rg -->
-        <dt>@Html.DisplayNameFor(model => model.FuncRg)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncRg)</dd>
-
-        <!-- Output Nasc -->
-        <dt>@Html.DisplayNameFor(model => model.FuncNasc)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncNasc)</dd>
-
-        <!-- Output Endereco -->
-        <dt>@Html.DisplayNameFor(model => model.FuncEndereco)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncEndereco)</dd>
-
-        <!-- Output Celular -->
-        <dt>@Html.DisplayNameFor(model => model.FuncCelular)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncCelular)</dd>
-
-        <!-- Output Email -->
-        <dt>@Html.DisplayNameFor(model => model.FuncEmail)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncEmail)</dd>
-
-        <!-- Output Cargo -->
-        <dt>@Html.DisplayNameFor(model => model.FuncCargo)</dt>
-        <dd>@Html.DisplayFor(model => model.FuncCargo)</dd>
-
-    </dl>
-    @Html.ActionLink("Voltar", "Index", "Funcionario")
-</fieldset>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FuncNome)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncCpf)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncRg)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncNasc)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncEndereco)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncCelular)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncEmail)</th>
+        <th>@Html.DisplayNameFor(model => model.FuncCargo)</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FuncNome)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncCpf)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncRg)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncNasc)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncEndereco)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncCelular)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncEmail)</td>
+            <td>@Html.DisplayFor(modelItem => item.FuncCargo)</td>
+            <td>@Html.ActionLink("Alterar", "AltFuncionario", null, new { cpfCliente = item.FuncCod }, new { @class = "btn btn-primary btn-xs" })</td>
+            <td>@Html.ActionLink("Deletar", "DelFuncionario", null, new { cpfCliente = item.FuncCod }, new { @class = "btn btn-danger btn-xs" })</td>
+        </tr>
+    }
+</table>
