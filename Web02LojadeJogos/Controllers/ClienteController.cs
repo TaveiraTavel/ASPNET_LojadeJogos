@@ -19,9 +19,23 @@ namespace Web02LojadeJogos.Controllers
         Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Listar(Cliente cliente)
+        public ActionResult Cadastrar(Cliente cliente)
         {
-            ac.CadastrarCliente(cliente);
+            try {
+                if (ModelState.IsValid)
+                {
+                    ac.CadastrarCliente(cliente);
+                    return RedirectToAction("Listar");
+                }
+                return View(cliente);
+            }
+            catch
+            {
+                return RedirectToAction("Cadastrar");
+            }
+        }
+        public ActionResult Listar()
+        {
             var Exibir = new Acoes();
             var Todos = Exibir.BuscarTodosClientes();
             return View(Todos);
