@@ -1,51 +1,37 @@
-﻿@model Web02LojadeJogos.Models.Jogo
+﻿@model IEnumerable<Web02LojadeJogos.Models.Jogo>
 @{
-    ViewBag.Title = "Listar";
+    ViewBag.Title = "Listar Jogos";
 }
 
-@using (Html.BeginForm())
+<br />
+<p>@Html.ActionLink("Cadastrar novo Jogo", "Cadastrar")</p>
+
+<h3 style="font-size: 21px;">Clientes Cadastrados</h3>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.JogoNome)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoVersao)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoDesenvolvedora)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoGenero)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoFaixaEtaria)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoPlataforma)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoAnoLancamento)</th>
+        <th>@Html.DisplayNameFor(model => model.JogoSinopse)</th>
+    </tr>
+@foreach (var item in Model)
 {
-    @Html.ValidationSummary(true)
-    <fieldset style="margin-top: 20px">
-        <legend>Jogo Recém-Cadastrado</legend>
-
-        <dl class="dl-horizontal">
-            <!-- Output Cod -->
-            <dt>@Html.DisplayNameFor(model => model.JogoCod)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoCod)</dd>
-
-            <!-- Output Nome -->
-            <dt>@Html.DisplayNameFor(model => model.JogoNome)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoNome)</dd>
-
-            <!-- Output Versao -->
-            <dt>@Html.DisplayNameFor(model => model.JogoVersao)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoVersao)</dd>
-
-            <!-- Output Desenvolvedora -->
-            <dt>@Html.DisplayNameFor(model => model.JogoDesenvolvedora)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoDesenvolvedora)</dd>
-
-            <!-- Output Genero -->
-            <dt>@Html.DisplayNameFor(model => model.JogoGenero)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoGenero)</dd>
-
-            <!-- Output FaixaEtaria -->
-            <dt>@Html.DisplayNameFor(model => model.JogoFaixaEtaria)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoFaixaEtaria)</dd>
-
-            <!-- Output Plataforma -->
-            <dt>@Html.DisplayNameFor(model => model.JogoPlataforma)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoPlataforma)</dd>
-
-            <!-- Output AnoLancamento -->
-            <dt>@Html.DisplayNameFor(model => model.JogoAnoLancamento)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoAnoLancamento)</dd>
-
-            <!-- Output Sinopse -->
-            <dt>@Html.DisplayNameFor(model => model.JogoSinopse)</dt>
-            <dd>@Html.DisplayFor(model => model.JogoSinopse)</dd>
-        </dl>
-    </fieldset>
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.JogoNome)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoVersao)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoDesenvolvedora)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoGenero)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoFaixaEtaria)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoPlataforma)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoAnoLancamento)</td>
+        <td>@Html.DisplayFor(modelItem => item.JogoSinopse)</td>
+        <td>@Html.ActionLink("Alterar", "AltCliente", null, new { cpfCliente = item.JogoCod }, new { @class = "btn btn-primary btn-xs" })</td>
+        <td>@Html.ActionLink("Deletar", "DelCliente", null, new { cpfCliente = item.JogoCod }, new { @class = "btn btn-danger btn-xs" })</td>
+    </tr>
 }
-
+</table>

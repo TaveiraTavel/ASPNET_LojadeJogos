@@ -25,3 +25,15 @@ CREATE TABLE tbFuncionario(
     Email varchar(70) not null,
     Cargo varchar(30) not null
 );
+
+CREATE TABLE tbJogo(
+	CodJogo mediumint primary key auto_increment,
+    Nome varchar(100) not null,
+    Versao varchar(20) not null,
+    Desenvolvedora varchar(100) not null,
+    Genero varchar(40) not null,
+    FaixaEtaria smallint not null,
+    Plataforma varchar(40) not null,
+    AnoLancamento smallint not null,
+    Sinopse varchar(255) not null
+);

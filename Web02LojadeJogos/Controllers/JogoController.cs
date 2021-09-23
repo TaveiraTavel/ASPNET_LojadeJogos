@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web02LojadeJogos.Models;
+using Web02LojadeJogos.Repositorio;
 
 namespace Web02LojadeJogos.Controllers
 {
@@ -15,6 +16,7 @@ namespace Web02LojadeJogos.Controllers
             var jogo = new Jogo();
             return View(jogo);
         }
+        Acoes ac = new Acoes();
 
         [HttpPost]
         public ActionResult Index(Jogo jogo)
@@ -25,9 +27,11 @@ namespace Web02LojadeJogos.Controllers
             }
             return View(jogo);
         }
-        public ActionResult Listar(Jogo jogo)
+        public ActionResult Listar()
         {
-            return View(jogo);
+            var Exibir = new Acoes();
+            var Todos = Exibir.BuscarTodosJogos();
+            return View(Todos);
         }
     }
 }

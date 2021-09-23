@@ -12,6 +12,7 @@ namespace Web02LojadeJogos.Repositorio
         Conexao con = new Conexao();
         MySqlCommand query = new MySqlCommand();
 
+        // Cadastros
         public void CadastrarCliente(Cliente cliente)
         {
             MySqlCommand query = new MySqlCommand("INSERT INTO tbCliente values(@cliNome, @cliCpf, @cliNasc, @cliEmail, @cliCelular, @cliEndereco);", con.ConectarBD());
@@ -40,6 +41,22 @@ namespace Web02LojadeJogos.Repositorio
             con.DesconectarBD();
         }
 
+        public void CadastrarJogo(Jogo jogo)
+        {
+            MySqlCommand query = new MySqlCommand("INSERT INTO tbJogo values(default, @jogoNome, @jogoVersao, @jogoDesenvolvedora, @jogoGenero, @jogoFaixaEtaria, @jogoPlataforma, @jogoAnoLancamento, @jogoSinopse);", con.ConectarBD());
+                query.Parameters.Add("@jogoNome", MySqlDbType.VarChar).Value = jogo.JogoNome;
+                query.Parameters.Add("@jogoVersao", MySqlDbType.VarChar).Value = jogo.JogoVersao;
+                query.Parameters.Add("@jogoDesenvolvedora", MySqlDbType.VarChar).Value = jogo.JogoDesenvolvedora;
+                query.Parameters.Add("@jogoGenero", MySqlDbType.VarChar).Value = jogo.JogoGenero;
+                query.Parameters.Add("@jogoFaixaEtaria", MySqlDbType.Int16).Value = jogo.JogoFaixaEtaria;
+                query.Parameters.Add("@jogoPlataforma", MySqlDbType.VarChar).Value = jogo.JogoPlataforma;
+                query.Parameters.Add("@jogoAnoLancamento", MySqlDbType.Int16).Value = jogo.JogoAnoLancamento;
+                query.Parameters.Add("@jogoSinopse", MySqlDbType.VarChar).Value = jogo.JogoSinopse;
+            query.ExecuteNonQuery();
+            con.DesconectarBD();
+        }
+
+        // Buscar por código
         public Cliente BuscarClienteByCpf(int cpf)
         {
             MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente WHERE Cpf = @cliCpf;", con.ConectarBD());
@@ -56,6 +73,15 @@ namespace Web02LojadeJogos.Repositorio
             return ListarFuncionarios(DadosFuncionarioByCod).FirstOrDefault();
         }
 
+        public Jogo BuscarJogoByCod(int cod)
+        {
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbJogo WHERE CodJogo = @jogoCod;", con.ConectarBD());
+                query.Parameters.Add("jogoCod", MySqlDbType.Int64).Value = cod;
+            var DadosJogoByCod = query.ExecuteReader();
+            return ListarJogos(DadosJogoByCod).FirstOrDefault();
+        }
+
+        // Buscar todos
         public List<Cliente> BuscarTodosClientes()
         {
             MySqlCommand query = new MySqlCommand("SELECT * FROM tbCliente;", con.ConectarBD());
@@ -70,6 +96,14 @@ namespace Web02LojadeJogos.Repositorio
             return ListarFuncionarios(DadosTodosFuncionarios);
         }
 
+        public List<Jogo> BuscarTodosJogos()
+        {
+            MySqlCommand query = new MySqlCommand("SELECT * FROM tbJogo", con.ConectarBD());
+            var DadosTodosJogos = query.ExecuteReader();
+            return ListarJogos(DadosTodosJogos);
+        }
+
+        // Listar todos
         public List<Cliente> ListarClientes(MySqlDataReader dados)
         {
             var ClienteByCpf = new List<Cliente>();
@@ -113,6 +147,29 @@ namespace Web02LojadeJogos.Repositorio
 
             dados.Close();
             return FuncionarioByCod;
+        }
+        public List<Jogo> ListarJogos(MySqlDataReader dados)
+        {
+            var JogoByCod = new List<Jogo>();
+            while (dados.Read())
+            {
+                var JogoTemp = new Jogo()
+                {
+                    JogoCod = Convert.ToUInt16(dados["CodJogo"]),
+                    JogoNome = dados["Nome"].ToString(),
+                    JogoVersao = dados["Versao"].ToString(),
+                    JogoDesenvolvedora = dados["Desenvolvedora"].ToString(),
+                    JogoGenero = dados["Genero"].ToString(),
+                    JogoFaixaEtaria = Convert.ToByte(dados["FaixaEtaria"]),
+                    JogoPlataforma = dados["Plataforma"].ToString(),
+                    JogoAnoLancamento = Convert.ToInt32(dados["AnoLancamento"]),
+                    JogoSinopse = dados["Sinopse"].ToString()
+                };
+                JogoByCod.Add(JogoTemp);
+            }
+
+            dados.Close();
+            return JogoByCod;
         }
     }
 }
