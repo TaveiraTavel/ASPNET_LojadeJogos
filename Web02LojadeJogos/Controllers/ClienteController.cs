@@ -21,7 +21,8 @@ namespace Web02LojadeJogos.Controllers
         [HttpPost]
         public ActionResult Cadastrar(Cliente cliente)
         {
-            try {
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     ac.CadastrarCliente(cliente);

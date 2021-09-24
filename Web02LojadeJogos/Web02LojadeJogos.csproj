@@ -173,7 +173,7 @@
     <Content Include="Views\Funcionario\Listar.cshtml" />
     <Content Include="Views\Cliente\Cadastrar.cshtml" />
     <Content Include="Views\Cliente\Listar.cshtml" />
-    <Content Include="Views\Jogo\Index.cshtml" />
+    <Content Include="Views\Jogo\Cadastrar.cshtml" />
     <Content Include="Views\Jogo\Listar.cshtml" />
   </ItemGroup>
   <ItemGroup>

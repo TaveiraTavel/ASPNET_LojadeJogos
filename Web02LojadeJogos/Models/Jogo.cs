@@ -9,8 +9,6 @@ namespace Web02LojadeJogos.Models
     public class Jogo
     {
         [Display(Name = "Código")]
-        [Required(ErrorMessage = "Campo obrigatório")]
-        [Range(1, 99999, ErrorMessage = "O código deve estar entre 1 e 99999")]
         public ushort JogoCod { get; set; }
 
         [Display(Name = "Nome")]

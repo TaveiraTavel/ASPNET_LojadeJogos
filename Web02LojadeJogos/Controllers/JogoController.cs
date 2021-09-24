@@ -11,7 +11,7 @@ namespace Web02LojadeJogos.Controllers
     public class JogoController : Controller
     {
         // GET: Jogo
-        public ActionResult Index()
+        public ActionResult Cadastrar()
         {
             var jogo = new Jogo();
             return View(jogo);
@@ -19,13 +19,21 @@ namespace Web02LojadeJogos.Controllers
         Acoes ac = new Acoes();
 
         [HttpPost]
-        public ActionResult Index(Jogo jogo)
+        public ActionResult Cadastrar(Jogo jogo)
         {
-            if (ModelState.IsValid)
+            try
             {
-                return View("Listar", jogo);
+                if (ModelState.IsValid)
+                {
+                    ac.CadastrarJogo(jogo);
+                    return RedirectToAction("Listar");
+                }
+                return View(jogo);
             }
-            return View(jogo);
+            catch
+            {
+                return RedirectToAction("Cadastrar");
+            }   
         }
         public ActionResult Listar()
         {
